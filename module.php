@@ -20,6 +20,8 @@ class ForgeShoppingcart extends Module {
     }
 
     public function start() {
+        App::instance()->tm->theme->addStyle(MOD_ROOT . "forge-shoppingcart/css/cart-trigger.less");
+
         $this->registerSettings();
     }
 
