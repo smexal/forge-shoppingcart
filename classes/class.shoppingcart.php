@@ -12,4 +12,8 @@ class Cart {
         ]);
     }
 
+    public static function addItem($item, $amount) {
+        
+    }
+
 }
