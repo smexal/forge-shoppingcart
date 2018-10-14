@@ -14,5 +14,40 @@
         margin-top: -6px;
         width: 24px;
         height: 24px;
+        opacity: 1;
     }
+
+    &.loading svg {
+        animation-name: pulsate_cart_trigger;
+        animation-duration: 1000ms;
+        animation-iteration-count: infinite;
+    }
+
+    &.updated svg {
+        animation-name: pop_cart_trigger;
+        animation-duration: 500ms;
+        animation-iteration-count: 1;
+    }
+}
+
+.add-to-cart {
+    padding: 10px 30px;
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@keyframes pulsate_cart_trigger {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    70% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes pop_cart_trigger {
+    0% { transform: scale(1) }
+    50% { transform: scale(1.3) }
+    55% { transform: scale(1.5); opacity: 0.3; }
+    100% { transform: scale(1); opacity: 1; }
 }

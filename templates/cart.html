@@ -1,0 +1,30 @@
+<div id="shopping-cart" class="s_cart_hide">
+    <a href="javascript://" class="close"></a>
+    <div class="content">
+        <h2>{$title}</h2>
+    </div>
+    {if="count($items)>0"}
+    <div class="items">
+        {loop="items"}
+            <div class="entry">
+                <span>{$value.amount}</span>
+                <h4>{$value.title}</h4>
+                <span class="price">{$value.price}</span>
+            </div>
+        {/loop}
+    </div>
+    <div class="totals">
+        {loop="totals"}
+        <div class="entry">
+            <h4>{$value.title}</h4>
+            <span class="value">{$value.value}</span>
+        </div>
+        {/loop}
+    </div>
+    <div class="actions">
+        {$payment_button}
+    </div>
+    {else}
+    <p>{$no_items}</p>
+    {/if}
+</div>
