@@ -3,14 +3,14 @@ var shoppingcart = {
 
     init : function() {
         $("button.add-to-cart").each(function() {
-            $(this).on('click', function(e) {
+            $(this).unbind('click').on('click', function(e) {
                 e.preventDefault();
                 shoppingcart.addAction($(this));
             });
         });
 
         $(".cart-trigger").each(function() {
-            $(this).on('click', function(e) {
+            $(this).unbind('click').on('click', function(e) {
                 e.preventDefault();
                 shoppingcart.getCart($(this));
             });
@@ -38,10 +38,11 @@ var shoppingcart = {
                 }
             });
             $("#shopping-cart").find(".close").each(function() {
-                $(this).on('click', function() {
+                $(this).unbind('click').on('click', function() {
                     shoppingcart.close();
                 });
             });
+            $(document).trigger("ajaxReload");
         });
 
     },
@@ -75,6 +76,7 @@ var shoppingcart = {
                     trigger.removeClass('updated');
                 }, 1000);
             });
+            $(document).trigger("ajaxReload");
         });
     }
 

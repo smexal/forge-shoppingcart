@@ -27,7 +27,14 @@ class Cart {
     }
 
     public static function render() {
-        $payment_args = [];
+        $payment_args = [
+            "title" => i('Payment', 'forge-shoppingcart'),
+            "label" => i('Checkout', 'forge-shoppingcart'),
+            "success" => Utils::getUrl(['']),
+            "cancel" => Utils::getUrl(['']),
+            'items' => self::getItems(),
+            "delivery" => true
+        ];
 
         return App::instance()->render(DOC_ROOT.'modules/forge-shoppingcart/templates/', "cart", [
             'title' => i('Your shopping cart', 'forge-shoppingcart'),
@@ -69,6 +76,8 @@ class Cart {
         foreach($_SESSION['shopping_cart'] as $cartitem) {
             $item = new CollectionItem($cartitem['item']);
             $items[] = [
+                'collection' => $cartitem['item'],
+                'user' => false,
                 'title' => $item->getMeta('title'),
                 'amount' => $cartitem['amount'],
                 'price' => Utils::formatAmount($item->getMeta('price') * $cartitem['amount'])
