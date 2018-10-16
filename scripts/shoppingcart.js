@@ -84,3 +84,4 @@ var shoppingcart = {
 
 $(document).ready(shoppingcart.init);
 $(document).on("ajaxReload", shoppingcart.init);
+$(document).on("hideOverlays", shoppingcart.close);
