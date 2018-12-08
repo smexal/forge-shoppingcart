@@ -15,6 +15,35 @@ var shoppingcart = {
                 shoppingcart.getCart($(this));
             });
         });
+
+        $("#shopping-cart").find("a.remove-item").each(function() {
+            $(this).on('click', function(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                var button = $(this);
+
+                $.ajax({
+                    method: 'POST',
+                    url: button.data('url'),
+                    data : {
+                        item: button.data('remove')
+                    }
+                }).done(function(data) {
+                    var newItems = $(data.content).find(".items").html();
+                    var newTotals = $(data.content).find(".totals").html();
+                    if(!newTotals) {
+                        newTotals = '';
+                    }
+                    if(newTotals == '') {
+                        $("#shopping-cart").find(".actions").remove();
+                    }
+                    $("#shopping-cart").find(".items").filter(":first").html(newItems);
+                    $("#shopping-cart").find(".totals").filter(":first").html(newTotals);
+
+                    $(document).trigger("ajaxReload"); 
+                });
+            });
+        });
     },
 
     getCart : function(button) {

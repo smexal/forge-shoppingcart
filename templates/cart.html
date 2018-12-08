@@ -9,6 +9,9 @@
             <div class="entry">
                 <span>{$value.amount}</span>
                 <h4>{$value.title}</h4>
+                <a href="javascript://" class="remove-item" data-remove="{$value.collection}" data-url="{$remove_url}">
+                    <svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve"><switch><foreignObject requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/" x="0" y="0" width="1" height="1"></foreignObject><g i:extraneous="self"><g><path d="M34.4,83c2.2,0,4-1.8,4-4v-42c0-2.2-1.8-4-4-4c-2.2,0-4,1.8-4,4v42C30.4,81.3,32.2,83,34.4,83z"></path><path d="M50,83c2.2,0,4-1.8,4-4v-42c0-2.2-1.8-4-4-4c-2.2,0-4,1.8-4,4v42C46,81.3,47.8,83,50,83z"></path><path d="M65.6,83c2.2,0,4-1.8,4-4v-42c0-2.2-1.8-4-4-4c-2.2,0-4,1.8-4,4v42C61.6,81.3,63.4,83,65.6,83z"></path><path d="M89,18.2H68.8l-2.5-8.4C65,5.5,61,2.5,56.5,2.5H43.5c-4.5,0-8.5,3-9.8,7.3l-2.5,8.4H11c-2.2,0-4,1.8-4,4s1.8,4,4,4h3.1     v61.7c0,5.3,4.3,9.7,9.7,9.7h52.5c5.3,0,9.7-4.3,9.7-9.7V26.1H89c2.2,0,4-1.8,4-4S91.2,18.2,89,18.2z M41.4,12.1     c0.3-0.9,1.1-1.6,2.1-1.6h13.1c1,0,1.8,0.6,2.1,1.6l1.8,6.1H39.5L41.4,12.1z M77.9,87.8c0,0.9-0.8,1.7-1.7,1.7H23.8     c-0.9,0-1.7-0.8-1.7-1.7V26.1h55.9V87.8z"></path></g></g></switch></svg>
+                </a>
                 <span class="price">{$value.price}</span>
             </div>
         {/loop}
@@ -25,6 +28,6 @@
         {$payment_button}
     </div>
     {else}
-    <p>{$no_items}</p>
+    <p class="items">{$no_items}</p>
     {/if}
 </div>

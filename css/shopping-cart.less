@@ -22,6 +22,18 @@
         top: -100%;
     }
 
+    .remove-item {
+        display: block;
+        width: 16px;
+        opacity: 0;
+        transition: 300ms;
+    }
+    .entry:hover {
+        .remove-item {
+            opacity: 1;
+        }
+    }
+
     .totals {
         span.value {
             font-weight: 600;

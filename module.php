@@ -39,6 +39,12 @@ class ForgeShoppingcart extends Module {
         return true;
     }
 
+    public function removeItem($not_used, $data) {
+        Cart::removeItem($data['item']);
+
+        return json_encode(['content' => Cart::render()]);
+    }
+
     public function getCart($not_used, $data) {
         return json_encode(['content' => Cart::render()]);
     }

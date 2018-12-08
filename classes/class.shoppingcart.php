@@ -37,6 +37,7 @@ class Cart {
         ];
 
         return App::instance()->render(DOC_ROOT.'modules/forge-shoppingcart/templates/', "cart", [
+            'remove_url'  => Utils::getUrl(['api', 'forge-shoppingcart', 'remove-item']),
             'title' => i('Your shopping cart', 'forge-shoppingcart'),
             'items' => self::getItems(),
             'totals' => self::getTotals(),
@@ -73,7 +74,11 @@ class Cart {
             return [];
         }
         $items = [];
-        foreach($_SESSION['shopping_cart'] as $cartitem) {
+        foreach($_SESSION['shopping_cart'] as $key => $cartitem) {
+            if(!array_key_exists('item', $cartitem)) {
+                unset($_SESSION['shopping_cart'][$key]);
+                continue;
+            }
             $item = new CollectionItem($cartitem['item']);
             $items[] = [
                 'collection' => $cartitem['item'],
@@ -113,6 +118,20 @@ class Cart {
             ];
         }
         return true;
+    }
+
+    public static function removeItem($item) {
+
+        // check if element already exists
+        $existing_element = array_search($item, array_column($_SESSION['shopping_cart'], 'item'));
+
+        if($existing_element !== false) {
+            unset($_SESSION['shopping_cart'][$existing_element]);
+        }
+
+        // reset indexes
+        $_SESSION['shopping_cart'] = array_values($_SESSION['shopping_cart']);
+
     }
 
 }
