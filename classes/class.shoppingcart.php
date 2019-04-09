@@ -18,11 +18,19 @@ class Cart {
         ]);
     }
 
-    public static function addToButton($item) {
+    public static function addToButton($item, $prefs = []) {
+        $amount_selection = false;
+        if(array_key_exists('amount_selection', $prefs) && $prefs['amount_selection']) {
+            $amount_selection = true;
+        }
         return App::instance()->render(DOC_ROOT.'modules/forge-shoppingcart/templates/', "add-to-cart", [
+            'id' => uniqid(),
             'item' => $item,
             'amount' => 1,
-            'url' => Utils::getUrl(['api', 'forge-shoppingcart', 'add-item'])
+            'url' => Utils::getUrl(['api', 'forge-shoppingcart', 'add-item']),
+            'amount_selection' => $amount_selection,
+            'amount_label' => i('Amount', 'forge-products'),
+            'success_message' => i('Product is in your shopping cart.', 'forge-shoppingcart')
         ]);
     }
 

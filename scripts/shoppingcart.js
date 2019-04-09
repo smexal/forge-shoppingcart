@@ -89,14 +89,26 @@ var shoppingcart = {
         $(".cart-trigger").each(function() {
             $(this).addClass('loading');
         });
+        the_amount = button.data('amount');
+        if(button.prev().is("#add-to-cart-amount")) {
+            the_amount = button.prev().val();
+        }
         $.ajax({
             method: 'POST',
             url: button.data('url'),
             data : {
                 item: button.data('item'),
-                amount: button.data('amount')
+                amount: the_amount
             }
         }).done(function(data) {
+            if(button.next().is(".add-to-cart-message")) {
+                button.next().addClass('visible');
+                button.next().html(button.next().attr('data-success'));
+                setTimeout(function() {
+                    button.next().removeClass('visible');
+                    button.next().html('');
+                }, 5000);
+            }
             $(".cart-trigger").each(function() {
                 $(this).removeClass('loading');
                 $(this).addClass('updated');
