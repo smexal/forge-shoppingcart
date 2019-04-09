@@ -128,6 +128,10 @@ class Cart {
         return true;
     }
 
+    public static function clear() {
+        unset($_SESSION['shopping_cart']);
+    }
+
     public static function removeItem($item) {
 
         // check if element already exists

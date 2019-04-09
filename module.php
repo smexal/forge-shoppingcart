@@ -3,6 +3,7 @@
 namespace Forge\Modules\ForgeShoppingcart;
 
 use Forge\Core\App\App;
+use Forge\Core\App\ModifyHandler;
 use Forge\Core\Abstracts\Module;
 use Forge\Core\Classes\Settings;
 use Forge\Core\Classes\Fields;
@@ -32,6 +33,20 @@ class ForgeShoppingcart extends Module {
         App::instance()->tm->theme->addScript($this->url()."scripts/shoppingcart.js", true);
 
         $this->registerSettings();
+
+        ModifyHandler::instance()->add(
+            'update_item_filter_order_table',
+            [$this, 'itemFilterOrderTable']
+        );
+    }
+
+    public function itemFilterOrderTable($filterValues) {
+        $collection = App::instance()->cm->getCollection('forge-events');
+
+        $newValues = [];
+        $newValues['delivery:postal_delivery'] = i('Product Delivery', 'forge-products');
+
+        return array_reverse(array_merge($filterValues, $newValues));
     }
 
     public function addItem($not_used, $data) {
