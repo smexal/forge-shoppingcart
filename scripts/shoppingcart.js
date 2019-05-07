@@ -88,6 +88,9 @@ var shoppingcart = {
         var url = button.data('url');
         $(".cart-trigger").each(function() {
             $(this).addClass('loading');
+            var indicator = $(this).find(".amount-indicator");
+            indicator.removeClass('hidden');
+            indicator.html(parseInt(indicator.html())+1);
         });
         $.ajax({
             method: 'POST',

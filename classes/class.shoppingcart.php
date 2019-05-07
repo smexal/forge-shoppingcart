@@ -14,6 +14,7 @@ class Cart {
 
     public static function trigger() {
         return App::instance()->render(DOC_ROOT.'modules/forge-shoppingcart/templates/', "cart-trigger", [
+            'amount' => self::getItemAmount(),
             'url' => Utils::getUrl(['api', 'forge-shoppingcart', 'get-cart'])
         ]);
     }
@@ -65,6 +66,17 @@ class Cart {
         foreach($_SESSION['shopping_cart'] as $cartitem) {
             $item = new CollectionItem($cartitem['item']);
             $amount+= $item->getMeta('price') * $cartitem['amount'];
+        }
+        return $amount;
+    }
+
+    public static function getItemAmount() {
+        if(! array_key_exists('shopping_cart', $_SESSION)) {
+            return 0;
+        }
+        $amount = 0;
+        foreach($_SESSION['shopping_cart'] as $key => $cartitem) {
+            $amount+=$cartitem['amount'];
         }
         return $amount;
     }
